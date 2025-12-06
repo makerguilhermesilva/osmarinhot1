@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EcoMaris — Protegendo a Vida nos Oceanos</title>
+  <style>
+    :root{
+      --bg:#031922;
+      --card:rgba(6,51,65,0.75);
+      --muted:#9fd3e6;
+      --accent:#00bcd4;
+      --accent-2:#0077b6;
+      --text:#e6fbff;
+      --shadow:0 10px 30px rgba(1,18,25,0.6);
+      font-family:"Inter","Segoe UI",Roboto,Arial,sans-serif;
+    }
+    .light{
+      --bg:#e8faff;
+      --card:#ffffffcc;
+      --muted:#1f6f8b;
+      --accent:#009ec5;
+      --accent-2:#006494;
+      --text:#04283a;
+      --shadow:0 8px 30px rgba(2,40,50,0.08);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:linear-gradient(180deg,var(--bg),#064257 80%);color:var(--text);scroll-behavior:smooth;transition:.4s ease background}
+    img{display:block;max-width:100%;height:auto;border-radius:10px;transition:transform .6s ease, box-shadow .6s ease, filter .6s ease}
+    img:hover{transform:scale(1.05) rotate(1deg);box-shadow:0 8px 20px rgba(0,0,0,0.4);filter:brightness(1.2)}
+
+    header{position:sticky;top:0;z-index:80;background:rgba(0,0,0,0.25);backdrop-filter:blur(10px);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+    .wrap{max-width:1150px;margin:0 auto;padding:1rem}
+    .topbar{display:flex;gap:1rem;align-items:center;justify-content:space-between;padding:.8rem 0}
+    .brand{display:flex;gap:.75rem;align-items:center}
+    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:white;font-weight:800;box-shadow:var(--shadow);animation:float 4s ease-in-out infinite alternate}
+    .title-small{font-size:.9rem;color:var(--muted)}
+    nav{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+    .nav-link{padding:.45rem .65rem;border-radius:10px;color:inherit;transition:.3s}
+    .nav-link:hover{background:rgba(255,255,255,0.08)}
+    .btn{cursor:pointer;border:0;padding:.7rem 1rem;border-radius:10px;font-weight:700;transition:.3s}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;box-shadow:0 8px 22px rgba(8,116,147,0.18)}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,188,212,0.3)}
+    .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.06);color:var(--text)}
+
+    .hero{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;padding:1.1rem;border-radius:20px;background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);box-shadow:var(--shadow);margin:1rem 0;animation:fadeInUp 1s ease}
+    .hero-visual img{height:320px;object-fit:cover;width:100%;animation:float 6s ease-in-out infinite alternate;border-radius:20px}
+    .actions{display:flex;gap:.6rem;flex-wrap:wrap}
+    .lead{color:var(--muted)}
+
+    main>section{margin:1.4rem 0;padding:1rem;border-radius:20px;background:var(--card);backdrop-filter:blur(6px);box-shadow:var(--shadow);animation:fadeInUp 1.2s ease}
+    h2{margin:.2rem 0 .6rem;font-size:1.6rem}
+
+    .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+    .curio{padding:1rem;border-radius:12px;background:rgba(255,255,255,0.06);transition:transform .3s ease, box-shadow .3s ease}
+    .curio:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 10px 20px rgba(0,0,0,0.3)}
+
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+    figure{margin:0;overflow:hidden;border-radius:12px;animation:fadeInUp 1s ease}
+    figcaption{padding:.5rem;font-size:.9rem;color:var(--muted);text-align:center;background:rgba(255,255,255,0.05);backdrop-filter:blur(6px)}
+
+    #quiz{text-align:center;padding:1rem}
+    .quiz-q{margin:1rem 0;font-weight:700}
+    .quiz-btn{margin:.3rem;padding:.6rem 1rem;border-radius:10px;border:2px solid var(--accent);background:transparent;color:var(--text);cursor:pointer;transition:.3s}
+    .quiz-btn:hover{background:var(--accent);color:white;}
+
+    #faq{position:relative;overflow:hidden;}
+    .faq-card{background:rgba(255,255,255,0.06);border-radius:12px;margin:0.6rem 0;padding:1rem;cursor:pointer;transition:all .4s ease;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+    .faq-card:hover{transform:translateY(-5px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+    .faq-card summary{font-weight:700;font-size:1.1rem;color:var(--accent);display:flex;justify-content:space-between;align-items:center}
+    .faq-card[open] summary{color:var(--accent-2);}
+    .faq-card p{margin-top:.6rem;color:var(--text);line-height:1.5;animation:fadeIn .6s ease;}
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"+";font-size:1.5rem;transition:.3s}
+    details[open] summary::after{content:"−";transform:rotate(180deg)}
+
+    footer{padding:2rem 1rem;text-align:center;color:var(--muted);position:relative}
+    .baicu{width:100px;position:absolute;right:20px;bottom:10px;animation:float 4s ease-in-out infinite alternate}
+
+    .bubbles{position:fixed;bottom:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:0;}
+    .bubble{position:absolute;bottom:-60px;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.9),rgba(255,255,255,0.1));border-radius:50%;opacity:0.7;animation:rise 12s infinite ease-in;}
+
+    @keyframes rise{0%{transform:translateY(0) scale(1);opacity:0.6;}80%{opacity:0.8;}100%{transform:translateY(-120vh) scale(1.2);opacity:0;}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    @keyframes float{from{transform:translateY(0);}to{transform:translateY(-10px);}}
+
+    @media(min-width:860px){.hero{grid-template-columns:1fr 420px}.hero-visual img{height:100%}}
+  </style>
+
+        </style>
+        <!-- Bibliotecas -->
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.8.0/dist/tf.min.js"
+        ></script>
+        ;
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"
+        ></script>
+        ;
+        <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<header>
+  <div class="wrap topbar">
+    <div class="brand">
+      <div class="logo">🦐</div>
+      <div><div style="font-weight:800">EcoMaris</div><div class="title-small">Protegendo a Vida nos Oceanos</div></div>
+    </div>
+    <nav>
+      <a class="nav-link" href="#curiosidades">Curiosidades</a>
+      <a class="nav-link" href="#galeria">Galeria</a>
+      <a class="nav-link" href="#quiz">Quiz</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+    </nav>
+    <div class="controls">
+      <button id="themeToggle" class="btn btn-ghost">🌓</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <span class="kicker">EcoMaris</span>
+      <h1>Preservar os oceanos é salvar o futuro</h1>
+      <p class="lead">Explore os mares, conheça espécies ameaçadas e participe de experiências interativas para proteger a vida marinha.</p>
+      <div class="actions">
+    <button id="abrirIA" class="btn-primary">
+        Reconhecimento Facial
+    </button>
+    <button id="btnAbrirChatbot" class="btn-ghost">
+        Abrir Chatbot
+    </button>
+</div>
+
+      </div>
+    </div>
+    <aside class="hero-visual">
+      <img src="https://img.freepik.com/fotos-premium/oceano-atlantico_410516-44325.jpg" alt="Mar azul profundo com ondas e luz solar">
+    </aside>
+  </section>
+
+  <section id="curiosidades">
+    <h2>🐚 Curiosidades Marinhas</h2>
+    <div class="grid-3">
+      <article class="curio"><strong>Mais plástico que peixe?</strong><p>Até 2050, os oceanos podem conter mais plástico do que peixes, em peso.</p></article>
+      <article class="curio"><strong>Tartarugas em risco</strong><p>Seis das sete espécies de tartarugas marinhas estão ameaçadas pela pesca e poluição.</p></article>
+      <article class="curio"><strong>Corais sob estresse</strong><p>O branqueamento já afeta 75% dos recifes do planeta — resultado do aquecimento global.</p></article>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <h2>🌊 Galeria Marinha</h2>
+    <div class="gallery">
+      <figure><img src="https://www.tamar.org.br/fotos/dermochelys.jpg" alt="Tartaruga"><figcaption>Tartaruga — essencial para o equilíbrio marinho</figcaption></figure>
+      <figure><img src="https://cdn.britannica.com/15/131315-050-A361C2B8/Nautilus.jpg" alt="Nautilus"><figcaption>Nautilus — um fóssil vivo em espiral</figcaption></figure>
+      <figure><img src="https://pescariasa.com.br/wp-content/uploads/2025/05/conheca-o-peixe-bolha-peixe-mais-feio-do-mundo.jpg" alt="Peixe-bolha"><figcaption>Peixe-bolha — curioso e vulnerável</figcaption></figure>
+      <figure><img src="https://static.wixstatic.com/media/fe5d56_8f0fac633d414a4e8ec1bd9ef61179ef~mv2.jpg" alt="Baleia jubarte"><figcaption>Baleia jubarte — gigante gentil dos mares</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <h2>🧩 Quiz Marinho</h2>
+    <div class="quiz-q">Qual destes animais é um mamífero marinho?</div>
+    <button class="quiz-btn" onclick="checkAnswer(this,false)">Polvo</button>
+    <button class="quiz-btn" onclick="checkAnswer(this,true)">Baleia</button>
+    <button class="quiz-btn" onclick="checkAnswer(this,false)">Tubarão</button>
+    <p id="quiz-result"></p>
+  </section>
+
+  <section id="faq">
+    <h2>❓ Perguntas Frequentes</h2>
+    <details class="faq-card"><summary>🌊 O que ameaça a vida marinha?</summary><p>Poluição, sobrepesca e aquecimento global. Estima-se que 8 milhões de toneladas de plástico entrem no mar por ano.</p></details>
+    <details class="faq-card"><summary>🐢 Como posso ajudar os oceanos?</summary><p>Reduza plásticos, apoie ONGs ambientais e consuma peixes de origem sustentável.</p></details>
+    <details class="faq-card"><summary>🐋 Os oceanos podem se recuperar?</summary><p>Sim! Áreas protegidas já mostraram regeneração. A natureza é resiliente quando cuidada.</p></details>
+  </section>
+</main>
+
+<div class="bubbles" id="bubbleContainer"></div>
+
+<!-- Chatbot -->
+
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
+<df-messenger
+  intent="WELCOME"
+  chat-title="ECOBOT"
+  agent-id="6c106d6c-eef7-41db-92b4-5bf82848937e"
+  language-code="pt-br">
+</df-messenger>
+
+
+<footer>
+  © <span id="year"></span> EcoMaris — Protegendo a Vida nos Oceanos
+  <img src="https://i.imgur.com/Hq7mTzK.png" alt="Baicu dando joinha" class="baicu">
+</footer>
+
+<script>
+  document.getElementById('themeToggle').addEventListener('click',()=>document.body.classList.toggle('light'));
+  document.getElementById('year').textContent=new Date().getFullYear();
+
+  const container=document.getElementById('bubbleContainer');
+  function createBubble(){
+    const b=document.createElement('div');
+    b.classList.add('bubble');
+    const size=Math.random()*30+10;
+    b.style.width=`${size}px`;
+    b.style.height=`${size}px`;
+    b.style.left=`${Math.random()*100}%`;
+    b.style.animationDuration=`${8+Math.random()*6}s`;
+    b.style.opacity=`${0.4+Math.random()*0.6}`;
+    container.appendChild(b);
+    setTimeout(()=>b.remove(),14000);
+  }
+  setInterval(createBubble,600);
+
+  function checkAnswer(btn,correct){
+    const result=document.getElementById("quiz-result");
+    if(correct){
+      result.textContent="✅ Correto! As baleias são mamíferos marinhos.";
+      result.style.color="var(--accent)";
+    }else{
+      result.textContent="❌ Ops! Tente novamente.";
+      result.style.color="tomato";
+    }
+  }
+  function scrollToQuiz(){
+    document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
+  }
+</script>
+
+  <!-- Modal da câmera (inicialmente escondido) -->
+  <div id="cameraModal" class="modal" aria-hidden="true" style="display:none;">
+    <div class="modal-content">
+      <button id="fecharModal" class="botao-fechar" title="Fechar">❌</button>
+      <h2 class="modal-title">Reconhecimento Facial</h2>
+      <div class="video-wrap">
+        <video id="video" autoplay muted playsinline></video>
+      </div>
+      <div class="controls">
+        <button id="tirarFoto" class="botao-foto" title="Tirar foto">📸</button>
+      </div>
+      <p id="modalStatus" class="modal-status">Aguardando...</p>
+      <canvas id="fotoCanvas" style="display:none;"></canvas>
+    </div>
+  </div>
+  <!-- Script principal -->
+  <script defer src="script.js"></script>
+</body>
+</html>
